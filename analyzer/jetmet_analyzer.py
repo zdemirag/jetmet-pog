@@ -6,6 +6,17 @@ import ROOT
 ROOT.gROOT.SetBatch(True)
 sys.argv = oldargv
 
+from FWCore.ParameterSet.VarParsing import VarParsing
+options = VarParsing('python')
+
+#default options
+options.inputFiles="/eos/cms/store/relval/CMSSW_9_4_0_pre3/RelValTTbar_13/MINIAODSIM/PU25ns_94X_mc2017_realistic_PixFailScenario_Run305081_FIXED_HS_AVE50-v1/10000/02B605A1-86C2-E711-A445-4C79BA28012B.root"
+options.outputFile="jetmetNtuples_dummy.root"
+options.maxEvents=-1
+
+#overwrite if given any command line arguments
+options.parseArguments()
+
 # define deltaR
 from math import hypot, pi, sqrt, fabs
 import numpy as n
@@ -15,7 +26,8 @@ from functions import *
 
 # create an oput tree.
 
-fout = ROOT.TFile ("jetmet.root","recreate")
+#fout = ROOT.TFile ("jetmet.root","recreate")
+fout = ROOT.TFile (options.outputFile,"recreate")
 t    = ROOT.TTree ("events","events")
 
 declare_branches(t)
@@ -39,10 +51,11 @@ rhoneutral_, rhoneutralLabel = Handle("double"), "fixedGridRhoFastjetCentralNeut
 rhochargedpileup_, rhochargedpileupLabel = Handle("double"), "fixedGridRhoFastjetCentralChargedPileUp"
 
 # open file (you can use 'edmFileUtil -d /store/whatever.root' to get the physical file name)
-events = Events("file:/eos/cms/store/relval/CMSSW_9_4_0_pre3/RelValTTbar_13/MINIAODSIM/PU25ns_94X_mc2017_realistic_PixFailScenario_Run305081_FIXED_HS_AVE50-v1/10000/02B605A1-86C2-E711-A445-4C79BA28012B.root")
+#events = Events("file:/eos/cms/store/relval/CMSSW_9_4_0_pre3/RelValTTbar_13/MINIAODSIM/PU25ns_94X_mc2017_realistic_PixFailScenario_Run305081_FIXED_HS_AVE50-v1/10000/02B605A1-86C2-E711-A445-4C79BA28012B.root")
+events = Events(options)
 
 for ievent,event in enumerate(events):
-    if ievent > 10: continue
+    if ievent > options.maxEvents: continue
     
     event.getByLabel(pfLabel, pfs)
     event.getByLabel(jetLabel, jets)

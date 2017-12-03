@@ -40,17 +40,13 @@ def WriteIntoDatabase(dbName, idx, f):
 parser = OptionParser(usage = "usage");
 parser.add_option("-n","--nJobs",dest="nJobs",type="int",help="number of jobs. (will be adapted to have more or less the same number of files)",default=1);
 parser.add_option("-i","--input",dest="input",type="string",help="input pset",default="jetmet_analyzer.py");
-parser.add_option("","--data",dest="data",action="store_true",help="run on data [Default=%default]",default=False);
-parser.add_option("","--mc",dest="data",action="store_false",help="run on mc");
-#parser.add_option("","--25ns",dest="is25ns",action="store_true",help="25ns [Default=%default]", default=True);
-#parser.add_option("","--50ns",dest="is25ns",action="store_false",help="50ns ");
 parser.add_option("-d","--dir",dest="dir",type="string",help="working directory",default="test/mydir");
 parser.add_option("-e","--eos",dest="eos",type="string",help="eos directory to scout, will not read the files in the pSet",default="");
 parser.add_option("","--query",dest="query",action='store_true',help="Use DAS for scouting. Ignore locality",default=False);
 parser.add_option("","--proxy",dest="proxy",action='store_true',help="Copy voms proxy",default=False);
 parser.add_option("","--xrdcp",dest="xrdcp",action='store_true',help="xrdcp file",default=False);
 parser.add_option("","--put-in",dest="put",type="string",help="eos directory to cp the results ",default="");
-parser.add_option("-q","--queue",dest="queue",type="string",help="batch Queue",default="");
+parser.add_option("-q","--queue",dest="queue",type="string",help="batch Queue",default="1nh");
 parser.add_option("","--instance",dest="instance",type="string",help="eos instance eg root://eoscms root://eosusr",default="");
 
 
@@ -60,7 +56,7 @@ sub_group.add_option("-j","--jobId",dest="jobId",type='string',help="Jobs to be 
 parser.add_option_group(sub_group)
 sub_group.add_option("-s","--status",dest="status",action='store_true',help="Display status of dir", default=False)
 sub_group.add_option("" ,"--follow", dest="follow", action="store_true",help= "follow eos directory, and if new files are created look into submission [default=%default]" , default=False)
-sub_group.add_option("" ,"--options", dest="options", type="string",help= "Add the following additional options to cmsRun" , default="")
+sub_group.add_option("" ,"--options", dest="options", type="string",help= "Add the following additional options to python" , default="")
 
 (opts,args) = parser.parse_args()
 
@@ -288,6 +284,9 @@ for idx0,fl in enumerate(fileChunks):
 
 	mylen += len(fl)
 	psetFileName = "jetmet_analyzer_%d.py"%(idx)
+	auxilary     = "jetmet_tree.py functions.py"
+        cmd = "cp", auxilary, opts.dir
+        call(cmd)
 	pset = opts.dir + "/" + psetFileName 
 	#create file .sh
 	call("touch %s/sub_%d.pend"%(opts.dir,idx) ,shell=True)
@@ -315,14 +314,9 @@ for idx0,fl in enumerate(fileChunks):
 		fl = fl2[:]
 	testDir = re.sub('/[^/]*.py', '', opts.input)
 	if testDir[0] != "/" : testDir = os.environ['PWD'] +"/"+ testDir
-	print >> sh, 'cp -va %s/jec ./'%testDir
-	print >> sh, 'cp -va %s/qg ./'%testDir
-	print >> sh, 'cp -va %s/jer ./'%testDir
-	print >> sh, "cmsRun " + os.environ['PWD'] + "/" + opts.dir + "/" + psetFileName, #+ " 2>&1 > log_%d.log"%idx
+	print >> sh, "python " + os.environ['PWD'] + "/" + opts.dir + "/" + psetFileName, #+ " 2>&1 > log_%d.log"%idx
 	#if opts.is25ns: print >>sh," is25ns=True is50ns=False",
 	#else : print >>sh," is25ns=False is50ns=True",
-	if opts.data: print >> sh, " isData=True",
-	else: print >>sh, " isData=False",
 
 	print >> sh, " inputFiles=" + ",".join(fl),
 	## print additional options and endl
@@ -341,10 +335,9 @@ for idx0,fl in enumerate(fileChunks):
 		prefix=""
 
 	if opts.put != "":
-		#print >> sh, '[ "${EXIT}" == "0" ] && { cmsMkdir ' + opts.put +'  && cmsStage -f ${WORKDIR}/NeroNtuples.root ' + opts.put + '/NeroNtuples_%(idx)d.root  && touch sub_%(idx)d.done || echo "cmsStage fail" > sub_%(idx)d.fail; }'%{'idx':idx}
-		print >> sh, '[ "${EXIT}" == "0" ] && { ' + EOS2 + " mkdir " + prefix+opts.put +'  ; ' +copyCmd+ ' ${WORKDIR}/NeroNtuples.root ' + opts.put + '/NeroNtuples_%(idx)d.root  && touch sub_%(idx)d.done || echo "cmsStage fail" > sub_%(idx)d.fail; }'%{'idx':idx}
+		print >> sh, '[ "${EXIT}" == "0" ] && { ' + EOS2 + " mkdir " + prefix+opts.put +'  ; ' +copyCmd+ ' ${WORKDIR}/jetmetNtuples.root ' + opts.put + '/jetmetNtuples_%(idx)d.root  && touch sub_%(idx)d.done || echo "cmsStage fail" > sub_%(idx)d.fail; }'%{'idx':idx}
 	else:
-		print >> sh, '[ "${EXIT}" == "0" ] && { cp ${WORKDIR}/NeroNtuples.root ./NeroNtuples_%(idx)d.root && touch sub_%(idx)d.done || echo "cp fail" > sub_%(idx)d.fail ; }'%{'idx':idx}
+		print >> sh, '[ "${EXIT}" == "0" ] && { cp ${WORKDIR}/jetmetNtuples.root ./jetmetNtuples_%(idx)d.root && touch sub_%(idx)d.done || echo "cp fail" > sub_%(idx)d.fail ; }'%{'idx':idx}
 
 	print >> sh, '[ "${EXIT}" == "0" ] || echo ${EXIT} > sub_%d.fail'%idx
 	print >> sh, ""
