@@ -345,7 +345,7 @@ for idx0,fl in enumerate(fileChunks):
 		prefix=""
 
 	if opts.put != "":
-		print >> sh, '[ "${EXIT}" == "0" ] && { ' + EOS2 + " mkdir " + prefix+opts.put +'  ; ' +copyCmd+ ' ${WORKDIR}/jetmetNtuples.root ' + opts.put + '/jetmetNtuples_%(idx)d.root  && touch sub_%(idx)d.done || echo "cmsStage fail" > sub_%(idx)d.fail; }'%{'idx':idx}
+		print >> sh, '[ "${EXIT}" == "0" ] && { ' + EOS2 + " mkdir -p " + opts.put +'  ; ' +copyCmd+ ' ${WORKDIR}/jetmetNtuples.root ' + opts.put + '/jetmetNtuples_%(idx)d.root  && touch sub_%(idx)d.done || echo "cmsStage fail" > sub_%(idx)d.fail; }'%{'idx':idx}
 	else:
 		print >> sh, '[ "${EXIT}" == "0" ] && { cp ${WORKDIR}/jetmetNtuples.root ./jetmetNtuples_%(idx)d.root && touch sub_%(idx)d.done || echo "cp fail" > sub_%(idx)d.fail ; }'%{'idx':idx}
 

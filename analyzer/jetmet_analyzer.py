@@ -55,7 +55,9 @@ rhochargedpileup_, rhochargedpileupLabel = Handle("double"), "fixedGridRhoFastje
 events = Events(options)
 
 for ievent,event in enumerate(events):
-    if ievent > options.maxEvents: continue
+
+    if options.maxEvents is not -1:
+        if ievent > options.maxEvents: continue
     
     event.getByLabel(pfLabel, pfs)
     event.getByLabel(jetLabel, jets)
