@@ -249,7 +249,7 @@ if opts.eos == "":
 elif opts.query:
         cmd = 'das_client.py --query="file dataset=' + opts.eos+'" --idx=0 --limit=10000  | grep -v "Showing" | grep -v \'^$\' '
         outputList = check_output(cmd,shell=True);
-        fileList = [ '"'+ f + '"' for f in outputList.split() if '/store' in f ]
+        fileList = [ '"root://cms-xrd-global.cern.ch//'+ f + '"' for f in outputList.split() if '/store' in f ]
 else:	
 	cmd = EOS+ " find -f " + opts.eos
 	print "Going to call cmd:",cmd

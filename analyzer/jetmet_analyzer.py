@@ -11,7 +11,7 @@ options = VarParsing('python')
 
 #default options
 options.inputFiles="/eos/cms/store/relval/CMSSW_9_4_0_pre3/RelValTTbar_13/MINIAODSIM/PU25ns_94X_mc2017_realistic_PixFailScenario_Run305081_FIXED_HS_AVE50-v1/10000/02B605A1-86C2-E711-A445-4C79BA28012B.root"
-options.outputFile="jetmetNtuples_dummy.root"
+options.outputFile="jetmetNtuples.root"
 options.maxEvents=-1
 
 #overwrite if given any command line arguments
