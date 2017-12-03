@@ -284,7 +284,10 @@ for idx0,fl in enumerate(fileChunks):
 
 	mylen += len(fl)
 	psetFileName = "jetmet_analyzer_%d.py"%(idx)
-	auxilary     = "jetmet_tree.py functions.py"
+	auxilary     = "jetmet_tree.py"
+        cmd = "cp", auxilary, opts.dir
+        call(cmd)
+	auxilary     = "functions.py"
         cmd = "cp", auxilary, opts.dir
         call(cmd)
 	pset = opts.dir + "/" + psetFileName 
