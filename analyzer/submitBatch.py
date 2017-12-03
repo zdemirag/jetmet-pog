@@ -39,7 +39,7 @@ def WriteIntoDatabase(dbName, idx, f):
 
 parser = OptionParser(usage = "usage");
 parser.add_option("-n","--nJobs",dest="nJobs",type="int",help="number of jobs. (will be adapted to have more or less the same number of files)",default=1);
-parser.add_option("-i","--input",dest="input",type="string",help="input pset",default="test/NeroProducer.py");
+parser.add_option("-i","--input",dest="input",type="string",help="input pset",default="jetmet_analyzer.py");
 parser.add_option("","--data",dest="data",action="store_true",help="run on data [Default=%default]",default=False);
 parser.add_option("","--mc",dest="data",action="store_false",help="run on mc");
 #parser.add_option("","--25ns",dest="is25ns",action="store_true",help="25ns [Default=%default]", default=True);
@@ -287,7 +287,7 @@ for idx0,fl in enumerate(fileChunks):
 			WriteIntoDatabase( opts.dir + "/database.txt" ,idx,f)
 
 	mylen += len(fl)
-	psetFileName = "NeroProducer_%d.py"%(idx)
+	psetFileName = "jetmet_analyzer_%d.py"%(idx)
 	pset = opts.dir + "/" + psetFileName 
 	#create file .sh
 	call("touch %s/sub_%d.pend"%(opts.dir,idx) ,shell=True)
