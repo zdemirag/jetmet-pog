@@ -188,7 +188,8 @@ def submit(list, queue = "1nh", name = "job"):
 	call(cmd,shell = True)
     	cmd = "bsub -q " + queue + " -o " + re.sub(".sh$",".txt",sh) + " -J "+name + re.sub(".*sub","",re.sub(".sh","",sh)) + " "+ sh
 	call(cmd, shell = True)
-    
+        print cmd
+
 if opts.onlysubmit:
 	if opts.jobId != "" and opts.jobId != "all" and opts.jobId != "fail" and opts.jobId != "run" and opts.jobId != "pend":
 		toBeSubmitted = []
@@ -290,6 +291,11 @@ for idx0,fl in enumerate(fileChunks):
 	auxilary     = "functions.py"
         cmd = "cp", auxilary, opts.dir
         call(cmd)
+        if opts.proxy: 
+                cmd = "cp /tmp/x509up_u"+ check_output("id -u",shell=True).split()[0] + " " + opts.dir
+                print cmd
+                os.system(cmd)
+
 	pset = opts.dir + "/" + psetFileName 
 	#create file .sh
 	call("touch %s/sub_%d.pend"%(opts.dir,idx) ,shell=True)
@@ -306,9 +312,10 @@ for idx0,fl in enumerate(fileChunks):
 	print >> sh, 'rm sub_%d.pend || true'%idx
 	print >> sh, 'rm sub_%d.txt || true'%idx
 	print >> sh, 'touch sub_%d.run'%idx
+        print >> sh, 'export X509_USER_PROXY='+os.environ['PWD']+'/x509up_u'+ check_output("id -u",shell=True).split()[0]
 	print >> sh, 'cd $WORKDIR'
 	print >> sh, 'echo "entering $WORKDIR"'
-	if opts.proxy: print >> sh, 'rsync -avP '+os.environ["HOSTNAME"]+":/tmp/x509up_u"+ check_output("id -u",shell=True).split()[0] + " ./"
+	#if opts.proxy: print >> sh, 'rsync -avP '+os.environ["HOSTNAME"]+":/tmp/x509up_u"+ check_output("id -u",shell=True).split()[0] + " ./"
 	if opts.xrdcp:
 		fl2=[]
 		for f in fl:
@@ -331,7 +338,7 @@ for idx0,fl in enumerate(fileChunks):
 	print >> sh, 'rm sub_%d.run'%idx
 	print >> sh, 'echo "exit status is ${EXIT}"'
 
-	copyCmd="cmsStage -f " 
+	copyCmd="cp " 
 	prefix="/eos/cms"
 	if opts.instance != "" and opts.instance != "root://eoscms":
 		copyCmd=EOS2 + " cp "

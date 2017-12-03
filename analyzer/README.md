@@ -10,4 +10,4 @@ It has the capability to recluster jets and re-correct jets on the fly.
 
 ## submitBatch.py
 With this script you can submit jobs for a given PD, by default it will submit jobs for the analyzer jetmet_analyzer.py
-   * python submitBatch.py -e "/RelValTTbar_13/CMSSW_9_4_0_pre3-94X_mc2017_design_IdealBS_v4-v1/MINIAODSIM" --query -n 2 --proxy
+   * python submitBatch.py -e "/RelValTTbar_13/CMSSW_9_4_0_pre3-94X_mc2017_design_IdealBS_v4-v1/MINIAODSIM" --query -n 2 --proxy --put-in "/eos/cms/store/group/phys_jetmet/zdemirag/batch/"
