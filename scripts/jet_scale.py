@@ -23,7 +23,6 @@ def main():
     parser.add_argument("-o", "--output"  ,dest="output"  , help="output folder name", type=str)
     parser.add_argument("-p", "--putype"  ,dest="pu"      , help="define the sample, options are 'flatpu','nopu'",type=str)
     parser.add_argument("-e", "--eta"     ,dest="eta"     , help="define the eta range, options are '0_1p3','1p3_2p1',2p1_2p5','2p5_3p0', '3p0_5p0'",type=str)
-    parser.add_argument("-v", "--version" ,dest="version" , help="define the version",type=str)
     parser.add_argument("-r", "--rho"     ,dest="rho"     , help="define the rho range",type=str)
     args = parser.parse_args()    
 
@@ -34,7 +33,7 @@ def main():
     _eta = [float(args.eta.split("_")[0].replace("p",".")), float(args.eta.split("_")[1].replace("p","."))]
     _rho = [float(args.rho.split("_")[0]), float(args.rho.split("_")[1])]
 
-    folder = args.output+"/"+args.version+"/"+args.pu+"/"
+    folder = args.output+"/"+args.pu+"/"
     os.system("mkdir -p "+folder)
     os.system("mkdir -p "+folder+"/fit")
 
@@ -72,7 +71,7 @@ def main():
         c.SetLogx()
         ROOT.gStyle.SetOptStat(False)
         h_mean.SetTitle("")
-        h_mean.GetXaxis().SetTitle("Jet p_{T} [GeV]")
+        h_mean.GetXaxis().SetTitle("Gen jet p_{T} [GeV]")
         h_mean.GetYaxis().SetTitle("Response")
         h_mean.GetXaxis().SetTitleOffset(1.2)
         h_mean.GetYaxis().SetTitleOffset(1.3)
@@ -84,9 +83,7 @@ def main():
         h_mean.SetMarkerSize(0.8)
         
         legend = ROOT.TLegend(0.30, 0.65, 0.65, .85);
-        legend . AddEntry(h_mean,"pf jet" , "lp")
-        legend . AddEntry(h_mean3,"chs jet" , "lp")
-        legend . AddEntry(h_mean2,"new jet" , "lp")
+        legend . AddEntry(h_mean,"chs jet" , "lp")
 
         legend.Draw("same")
 
@@ -105,7 +102,7 @@ def main():
         c1 = ROOT.TCanvas("sigma","sigma", 600, 600)
         c1.cd()
         c1.SetLogx()
-        h_sigma.GetXaxis().SetTitle("Jet p_{T} [GeV]")
+        h_sigma.GetXaxis().SetTitle("Gen jet p_{T} [GeV]")
         h_sigma.GetYaxis().SetTitle("Resolution / Response")
         h_sigma.SetTitle("")
         h_sigma.GetXaxis().SetTitleOffset(1.2)
@@ -133,7 +130,7 @@ def main():
         c2 = ROOT.TCanvas("sigmaabs","sigmaabs", 600, 600)
         c2.cd()
         c2.SetLogx()
-        h_sigma11.GetXaxis().SetTitle("Jet p_{T} [GeV]")        
+        h_sigma11.GetXaxis().SetTitle("Gen jet p_{T} [GeV]")        
         h_sigma11.GetYaxis().SetTitle("Resolution")
         h_sigma11.SetTitle("")
         h_sigma11.GetXaxis().SetTitleOffset(1.2)

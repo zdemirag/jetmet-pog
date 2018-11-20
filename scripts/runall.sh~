@@ -1,0 +1,91 @@
+python compare_spectra_ee2018.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30      -v jet_eta -bl -5 -bh 5 -b 50
+python compare_spectra_ee2018.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30_norm -v jet_eta -bl -5 -bh 5 -b 50
+python compare_spectra_ee2018.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30      -v rawjet_eta -bl -5 -bh 5 -b 50
+python compare_spectra_ee2018.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30_norm -v rawjet_eta -bl -5 -bh 5 -b 50
+
+python compare_spectra_ee2018.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30      -v jet_eta -bl -5 -bh 5 -b 50
+python compare_spectra_ee2018.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30_norm -v jet_eta -bl -5 -bh 5 -b 50
+python compare_spectra_ee2018.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30      -v rawjet_eta -bl -5 -bh 5 -b 50
+python compare_spectra_ee2018.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30_norm -v rawjet_eta -bl -5 -bh 5 -b 50
+
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30      -v NEMF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30_norm -v NEMF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30      -v NHF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30_norm -v NHF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30      -v CHF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30_norm -v CHF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30      -v CEMF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30_norm -v CEMF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30      -v NumNeutralParticle -bl 0 -bh 100 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_noPU_2018.root -o QCD_noPU_cand30_norm -v NumNeutralParticle -bl 0 -bh 100 -b 100
+
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30      -v NEMF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30_norm -v NEMF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30      -v NHF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30_norm -v NHF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30      -v CHF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30_norm -v CHF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30      -v CEMF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30_norm -v CEMF -bl 0 -bh 1 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30      -v NumNeutralParticle -bl 0 -bh 100 -b 100
+python compare_spectra_ee2018_cuts.py -i ../analyzer/RelValQCD_FlatPt_15_3000HS_13_PU_2018.root -o QCD_PU_cand30_norm -v NumNeutralParticle -bl 0 -bh 100 -b 100
+
+'''
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_ORIGINAL.root -o QCD_Original_norm -v jet_phi -bl -3 -bh 3 -b 25
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_REF.root -o QCD_Reference_norm -v jet_phi -bl -3 -bh 3 -b 25
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_NEW.root -o QCD_New_norm -v jet_phi -bl -3 -bh 3 -b 25
+
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_ORIGINAL.root -o QCD_Original_norm -v met -bl 0 -bh 500 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_REF.root -o QCD_Reference_norm -v met -bl 0 -bh 500 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_NEW.root -o QCD_New_norm -v met -bl 0 -bh 500 -b 50
+
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_ORIGINAL.root -o QCD_Original_norm -v dphipfmet -bl 0 -bh 3 -b 10
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_REF.root -o QCD_Reference_norm -v dphipfmet -bl 0 -bh 3 -b 10 
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_NEW.root -o QCD_New_norm -v dphipfmet -bl 0 -bh 3 -b 10
+
+
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_ORIGINAL.root -o QCD_Original -v jet_phi -bl -3 -bh 3 -b 25
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_REF.root -o QCD_Reference -v jet_phi -bl -3 -bh 3 -b 25
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_NEW.root -o QCD_New -v jet_phi -bl -3 -bh 3 -b 25
+
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_ORIGINAL.root -o QCD_Original -v met -bl 0 -bh 500 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_REF.root -o QCD_Reference -v met -bl 0 -bh 500 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/QCDFlatPU_HEmiss_NEW.root -o QCD_New -v met -bl 0 -bh 500 -b 50
+
+
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation_norm -v jet_phi -bl -3 -bh 3 -b 25
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig_norm -v jet_phi -bl -3 -bh 3 -b 25
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation_norm -v met -bl 0 -bh 500 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig_norm -v met -bl 0 -bh 500 -b 50
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation_norm -v dphipfmet -bl 0 -bh 3 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig_norm -v dphipfmet -bl 0 -bh 3 -b 50 
+
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation -v jet_phi -bl -3 -bh 3 -b 25
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig -v jet_phi -bl -3 -bh 3 -b 25
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation -v met -bl 0 -bh 500 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig -v met -bl 0 -bh 500 -b 50
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation -v jet_pt -bl 0 -bh 500 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig -v jet_pt -bl 0 -bh 500 -b 50
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation -v dphipfmet -bl 0 -bh 3 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig -v dphipfmet -bl 0 -bh 3 -b 50 
+
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation_inc -v jet_phi -bl -3 -bh 3 -b 25
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig_inc -v jet_phi -bl -3 -bh 3 -b 25
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation_inc -v met -bl 0 -bh 500 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig_inc -v met -bl 0 -bh 500 -b 50
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation_inc -v jet_pt -bl 0 -bh 500 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig_inc -v jet_pt -bl 0 -bh 500 -b 50
+
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_mitigation_total.root -o JetHT_mitigation_inc -v dphipfmet -bl 0 -bh 3 -b 50
+python compare_spectra_twoinput.py -i ../analyzer/output/jetht_hem_total.root -o JetHT_orig_inc -v dphipfmet -bl 0 -bh 3 -b 50 
+'''

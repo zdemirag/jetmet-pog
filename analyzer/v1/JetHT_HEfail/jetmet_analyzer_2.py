@@ -83,6 +83,7 @@ for ievent,event in enumerate(events):
 
     njet[0]   = jets.product().size()
 
+    dphipfmet[0] = 999.
     ###CHS JETS
     for i,j in enumerate(jets.product()):
 
@@ -112,81 +113,21 @@ for ievent,event in enumerate(events):
         jet_loose[i] = jet_loose[i] or (NHF[i]<0.98 and NEMF[i]>0.01 and NumNeutralParticle[i]>2 and abs(eta)>2.7 and abs(eta)<=3.0 )
         jet_loose[i] = jet_loose[i] or (NEMF[i]<0.90 and NumNeutralParticle[i]>10 and abs(eta)>3.0)
 
-        #if not (j.genJet() == None):
-        #    genjet_pt[i]  = j.genJet().pt()
-        #    genjet_eta[i] = j.genJet().eta()
-        #    genjet_phi[i] = j.genJet().phi()
-        #    genjet_energy[i] = j.genJet().energy()
-
-        #else:
-        #    genjet_pt[i] = -999.
-        #    genjet_eta[i] = -999.
-        #    genjet_phi[i] = -999.
-        #    genjet_energy[i] = -999.
-
-
-        sourceCandidate = set()
-
-        # now get a list of the PF candidates used to build this jet
-        for isource in xrange(j.numberOfSourceCandidatePtrs()):
-            sourceCandidate.add(j.sourceCandidatePtr(isource).key()) # the key is the index in the pf collection
-
-        neutral[i], charged[i], photon[i], muon[i], electron[i], hhf[i], ehf[i], other[i] = 0, 0, 0, 0, 0, 0, 0, 0
-        neutral_e[i], charged_e[i], photon_e[i],muon_e[i],electron_e[i],hhf_e[i], ehf_e[i], other_e[i] = 0, 0, 0, 0, 0, 0, 0, 0
-        neutral_n[i], charged_n[i], photon_n[i],muon_n[i],electron_n[i],hhf_n[i], ehf_n[i], other_n[i] = 0, 0, 0, 0, 0, 0, 0, 0
-
-        for ipf,pf in enumerate(pfs.product()):            
-
-            # if pf candidate is part of the jet, lets categorize
-            if ipf in sourceCandidate:
-
-                if ( abs(pf.pdgId()) == 211 ):
-                    charged[i]   += pf.pt();
-                    charged_e[i] += pf.energy();
-                    charged_n[i] += 1;
-                    
-                elif abs(pf.pdgId()) == 130:
-                    neutral[i] += pf.pt();
-                    neutral_e[i] += pf.energy();
-                    neutral_n[i] += 1;
-
-                elif abs(pf.pdgId()) == 22:
-                    photon[i] += pf.pt();
-                    photon_e[i] += pf.energy();
-                    photon_n[i] += 1;
-
-                elif abs(pf.pdgId()) == 13:
-                    muon[i] += pf.pt();
-                    muon_e[i] += pf.energy();
-                    muon_n[i] += 1;
-
-                elif abs(pf.pdgId()) == 11:
-                    electron[i] += pf.pt();
-                    electron_e[i] += pf.energy();
-                    electron_n[i] += 1;
-
-                elif abs(pf.pdgId()) == 1:
-                    hhf[i] += pf.pt();
-                    hhf_e[i] += pf.energy();
-                    hhf_n[i] += 1;
-
-                elif abs(pf.pdgId()) == 2:
-                    ehf[i] += pf.pt();
-                    ehf_e[i] += pf.energy();
-                    ehf_n[i] += 1;
-                
-                else:
-                    other[i] += pf.pt();
-                    other_e[i] += pf.energy();
-                    other_n[i] += 1;
-
-
+        if j.pt()>30.:
+            dphipfmet[0] = min(abs(deltaPhi(j.phi(),mets.product().front().phi())),dphipfmet[0])
+            #print i, j.pt(),  j.phi(), mets.product().front().phi(), dphipfmet
+            
+            #print "Final", dphipfmet[0]
     #MET Information
     metprod   = mets.product().front()
     met[0]    = metprod.pt()                
+    met_phi[0]= metprod.phi()                
+    mex[0]    = metprod.px()                
+    mey[0]    = metprod.py()                
     #genmet[0] = metprod.genMET().pt()                
     rawmet[0] = metprod.uncorPt()
-    
+
+    '''
     for ipf,pf in enumerate(pfs.product()):            
         if ( abs(pf.pdgId()) == 211 ):
             charged_met[0]   += pf.pt();
@@ -219,7 +160,7 @@ for ievent,event in enumerate(events):
         else:
             other_met[0] += pf.pt();
             #other_n_met[0] += 1;
-            
+       '''     
     t.Fill()
 
 

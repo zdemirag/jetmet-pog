@@ -1,0 +1,16 @@
+
+
+
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRon.root -o ~/www/JetMET/ecal/v2SR_on/ -p nopu -e 0_1p3 -t ""
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRon.root -o ~/www/JetMET/ecal/v2SR_on/ -p nopu -e 1p3_2p1 -t ""
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRon.root -o ~/www/JetMET/ecal/v2SR_on/ -p nopu -e 2p1_2p5 -t ""
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRon.root -o ~/www/JetMET/ecal/v2SR_on/ -p nopu -e 2p5_3p0 -t ""
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRon.root -o ~/www/JetMET/ecal/v2SR_on/ -p nopu -e 3p0_5p0 -t ""
+
+
+
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRoff.root -o ~/www/JetMET/ecal/v2SR_off/ -p nopu -e 0_1p3  -t ""
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRoff.root -o ~/www/JetMET/ecal/v2SR_off/ -p nopu -e 1p3_2p1 -t ""
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRoff.root -o ~/www/JetMET/ecal/v2SR_off/ -p nopu -e 2p1_2p5 -t ""
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRoff.root -o ~/www/JetMET/ecal/v2SR_off/ -p nopu -e 2p5_3p0 -t ""
+python jet_fractions.py -i /eos/cms/store/group/phys_jetmet/zdemirag/batch/allinputs/QCD_FlatPt_v2_SRoff.root -o ~/www/JetMET/ecal/v2SR_off/ -p nopu -e 3p0_5p0 -t ""

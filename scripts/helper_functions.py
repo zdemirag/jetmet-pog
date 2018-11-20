@@ -4,8 +4,8 @@ import os
 import ROOT
 import math
 from array import array
-from tdrStyle import *
-setTDRStyle()
+import numpy as n
+
 ROOT.gROOT.SetBatch(True)
 
 # RooFit
@@ -22,7 +22,11 @@ def ConvFit( shape, isData, var_name, label, fit_plot_directory, fit_filename = 
     tmp_mean = shape.GetMean()
     tmp_sigma = shape.GetRMS()
 
-    asymmetry   = ROOT.RooRealVar(var_name,label,tmp_mean-5*tmp_sigma,tmp_mean+6*tmp_sigma) ;
+    tmp_mean_error = shape.GetMeanError()
+    tmp_sigma_error = shape.GetRMSError()
+
+    #asymmetry   = ROOT.RooRealVar(var_name,label,tmp_mean-5*tmp_sigma,tmp_mean+6*tmp_sigma) ;
+    asymmetry   = ROOT.RooRealVar(var_name,label,tmp_mean-4*tmp_sigma,tmp_mean+4*tmp_sigma) ;
     dh          = ROOT.RooDataHist("datahistshape","datahistshape",ROOT.RooArgList(asymmetry),ROOT.RooFit.Import(shape)) ;
     
     # plot the data hist with error from sum of weighted events
@@ -49,6 +53,7 @@ def ConvFit( shape, isData, var_name, label, fit_plot_directory, fit_filename = 
         gauss.fitTo(dh,ROOT.RooFit.Save(),ROOT.RooFit.Range(dh.mean(asymmetry)-2*dh.sigma(asymmetry),dh.mean(asymmetry)+2*dh.sigma(asymmetry)))
     else:
         #lxg.fitTo(dh,ROOT.RooFit.Save(),ROOT.RooFit.SumW2Error(True),ROOT.RooFit.Range(dh.mean(asymmetry)-3*dh.sigma(asymmetry),dh.mean(asymmetry)+4*dh.sigma(asymmetry)))
+        #lxg.fitTo(dh,ROOT.RooFit.Save(),ROOT.RooFit.SumW2Error(True),ROOT.RooFit.Range(dh.mean(asymmetry)-2*dh.sigma(asymmetry),dh.mean(asymmetry)+2*dh.sigma(asymmetry)))
         lxg.fitTo(dh,ROOT.RooFit.Save(),ROOT.RooFit.SumW2Error(True))
 
     lxg.plotOn(frame)
@@ -82,47 +87,111 @@ def ConvFit( shape, isData, var_name, label, fit_plot_directory, fit_filename = 
     rms_asymmetry_error  = gauss_sigma.getError()
 
     #if the chi2 is going crazy default to the mean and rms of the histogram
-    if frame.chiSquare(6)  > 100:
+    if frame.chiSquare(6)  > -1:
         mean_asymmetry = tmp_mean
+        mean_asymmetry_error = tmp_mean_error
         rms_asymmetry  = tmp_sigma
+        rms_asymmetry_error  = tmp_sigma_error
 
     return mean_asymmetry, mean_asymmetry_error, rms_asymmetry, rms_asymmetry_error
 
-def fraction(charged,neutral,photon,electron,muon,hhf,ehf,pt1,pt2,eta1,eta2,jet):
-    
-    h_charged  = TH1F("hch" ,"hch",100,0,1)
-    h_neutral  = TH1F("hnh" ,"hnh",100,0,1)
-    h_photon   = TH1F("hph" ,"hph",100,0,1)
-    h_muon     = TH1F("hmu" ,"hmu",100,0,1)
-    h_electron = TH1F("hel" ,"hel",100,0,1)
-    h_hhf      = TH1F("hhhf","hhhf",100,0,1)
-    h_ehf      = TH1F("hehf","hehf",100,0,1)
-
-    sum_jet = charged + neutral + photon + electron + muon + hhf + ehf
+def fraction2(t_in,charged,neutral,photon,electron,muon,hhf,ehf,pt1,pt2,eta1,eta2,phi1, phi2, jet):
 
     cut_gen = "("+jet+"genjet_pt>0)"
+    cut = "genjet_pt>"+str(pt1)+" && ""genjet_pt<"+str(pt2)+" && "+cut_gen+" && abs(genjet_eta)>="+str(eta1)+" && abs(genjet_eta)<"+str(eta2) + "&& genjet_phi >="+str(phi1) + " && genjet_phi<"+str(phi2)
+
+    #phi_range = [float(phi1), float(phi2)]
+
+    #h_sum      = ROOT.TProfile("hsum","hsum",len(phi_range),phi_range)
+    #h_charged  = ROOT.TProfile("hch","hch",len(phi_range),phi_range)
+    
+    h_sum      = ROOT.TH1F("hsum","hsum",1,0,1)
+    h_charged  = ROOT.TH1F("hch" ,"hch",1,0,1)
+
+    h_neutral  = ROOT.TH1F("hnh" ,"hnh",1,0,1)
+    h_photon   = ROOT.TH1F("hph" ,"hph",1,0,1)
+    h_muon     = ROOT.TH1F("hmu" ,"hmu",1,0,1)
+    h_electron = ROOT.TH1F("hel" ,"hel",1,0,1)
+    h_hhf      = ROOT.TH1F("hhhf","hhhf",1,0,1)
+    h_ehf      = ROOT.TH1F("hehf","hehf",1,0,1)
+
+
+    sum_jet = "("+charged +"+"+ neutral +"+"+ photon +"+"+ electron +"+"+ muon +"+"+ hhf +"+"+ ehf +")"
+
+    t_in.Draw("0.5>>hsum",
+              "("+sum_jet+")*("+cut+")","goff")    
+    t_in.Draw("0.5>>hch",
+              "(charged_e)*("+cut+")","goff")
+    t_in.Draw("0.5>>hnh",
+              "(neutral_e)*("+cut+")","goff")
+    t_in.Draw("0.5>>hph",
+              "(photon_e)*("+cut+")","goff")
+    t_in.Draw("0.5>>hmu",
+              "(muon_e)*("+cut+")","goff")
+    t_in.Draw("0.5>>hel",
+              "(electron_e)*("+cut+")","goff")
+    t_in.Draw("0.5>>hhhf",
+              "(hhf_e)*("+cut+")","goff")
+    t_in.Draw("0.5>>hehf",
+              "(ehf_e)*("+cut+")","goff")
+
+    print h_charged.Integral(), h_charged.Integral()/h_sum.Integral(), h_sum.Integral()
+    return h_charged.GetBinContent(1)/h_sum.GetBinContent(1), h_neutral.GetBinContent(1)/h_sum.GetBinContent(1), h_photon.GetBinContent(1)/h_sum.GetBinContent(1), h_muon.GetBinContent(1)/h_sum.GetBinContent(1), h_electron.GetBinContent(1)/h_sum.GetBinContent(1), h_hhf.GetBinContent(1)/h_sum.GetBinContent(1), h_ehf.GetBinContent(1)/h_sum.GetBinContent(1)
+    
+
+
+
+def fraction(t_in,charged,neutral,photon,electron,muon,hhf,ehf,pt1,pt2,eta1,eta2,phi1, phi2, jet):
+    
+    h_charged  = ROOT.TH1F("hch" ,"hch",100,0,1)
+    h_neutral  = ROOT.TH1F("hnh" ,"hnh",100,0,1)
+    h_photon   = ROOT.TH1F("hph" ,"hph",100,0,1)
+    h_muon     = ROOT.TH1F("hmu" ,"hmu",100,0,1)
+    h_electron = ROOT.TH1F("hel" ,"hel",100,0,1)
+    h_hhf      = ROOT.TH1F("hhhf","hhhf",100,0,1)
+    h_ehf      = ROOT.TH1F("hehf","hehf",100,0,1)
+
+    sum_jet = "("+charged +"+"+ neutral +"+"+ photon +"+"+ electron +"+"+ muon +"+"+ hhf +"+"+ ehf +")"
+
+    cut_gen = "("+jet+"genjet_pt>0)"
+    cut = "genjet_pt>"+str(pt1)+" && ""genjet_pt<"+str(pt2)+" && "+cut_gen+" && abs(genjet_eta)>="+str(eta1)+" && abs(genjet_eta)<"+str(eta2) + "&& genjet_phi >="+str(phi1) + " && genjet_phi<"+str(phi2)
 
     t_in.Draw(charged+"/"+sum_jet+">>hch",
-              sum_jet+">"+str(pt1)+" && "+sum_jet+"<"+str(pt2)+" && "+cut_gen+" && abs("+jet+"jet_eta)>="+str(eta1)+" && abs("+jet+"jet_eta)<"+str(eta2),"goff")
+              cut,"goff")
 
     t_in.Draw(neutral+"/"+sum_jet+">>hnh",
-              sum_jet+">"+str(pt1)+" && "+sum_jet+"<"+str(pt2)+" && "+cut_gen+" && abs("+jet+"jet_eta)>="+str(eta1)+" && abs("+jet+"jet_eta)<"+str(eta2),"goff")
+              "genjet_pt>"+str(pt1)+" && ""genjet_pt<"+str(pt2)+" && "+cut_gen+ "&& abs(genjet_eta)>="+str(eta1)+" && abs(genjet_eta)<"+str(eta2),"goff")
 
     t_in.Draw(photon+"/"+sum_jet+">>hph",
-              sum_jet+">"+str(pt1)+" && "+sum_jet+"<"+str(pt2)+" && "+cut_gen+" && abs("+jet+"jet_eta)>="+str(eta1)+" && abs("+jet+"jet_eta)<"+str(eta2),"goff")
+              cut,"goff")
 
     t_in.Draw(muon+"/"+sum_jet+">>hmu",
-              sum_jet+">"+str(pt1)+" && "+sum_jet+"<"+str(pt2)+" && "+cut_gen+" && abs("+jet+"jet_eta)>="+str(eta1)+" && abs("+jet+"jet_eta)<"+str(eta2),"goff")
+              cut,"goff")
 
     t_in.Draw(electron+"/"+sum_jet+">>hel",
-              sum_jet+">"+str(pt1)+" && "+sum_jet+"<"+str(pt2)+" && "+cut_gen+" && abs("+jet+"jet_eta)>="+str(eta1)+" && abs("+jet+"jet_eta)<"+str(eta2),"goff")
+              cut,"goff")
 
-    t_in.Draw(hhf+"/"+sum_jet+">>hhf",
-              sum_jet+">"+str(pt1)+" && "+sum_jet+"<"+str(pt2)+" && "+cut_gen+" && abs("+jet+"jet_eta)>="+str(eta1)+" && abs("+jet+"jet_eta)<"+str(eta2),"goff")
+    t_in.Draw(hhf+"/"+sum_jet+">>hhhf",
+              cut,"goff")
 
-    t_in.Draw(hef+"/"+sum_jet+">>hef",
-              sum_jet+">"+str(pt1)+" && "+sum_jet+"<"+str(pt2)+" && "+cut_gen+" && abs("+jet+"jet_eta)>="+str(eta1)+" && abs("+jet+"jet_eta)<"+str(eta2),"goff")
+    t_in.Draw(ehf+"/"+sum_jet+">>hehf",
+              cut,"goff")
 
+    fout = ROOT.TFile("fractions.root","recreate")
+    fout.cd()
+    h_charged.Write()
+    h_neutral.Write()
+    h_photon.Write()
+    fout.Close()
+
+    median   = n.zeros(1,dtype=float)
+    quantile = n.zeros(1,dtype=float)        
+    quantile[0] = 0.5
+    
+    h_electron.GetQuantiles(1, median, quantile)    
+    print median[0]
+
+    print h_charged.GetMean(), h_neutral.GetMean(), h_photon.GetMean(), h_muon.GetMean(), h_electron.GetMean(), h_hhf.GetMean(), h_ehf.GetMean(), h_charged.GetMean()+ h_neutral.GetMean()+ h_photon.GetMean()+ h_muon.GetMean()+ h_electron.GetMean()+ h_hhf.GetMean()+ h_ehf.GetMean()
 
     return h_charged.GetMean(), h_neutral.GetMean(), h_photon.GetMean(), h_muon.GetMean(), h_electron.GetMean(), h_hhf.GetMean(), h_ehf.GetMean()
     

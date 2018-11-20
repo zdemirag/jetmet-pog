@@ -39,14 +39,14 @@ def WriteIntoDatabase(dbName, idx, f):
 
 parser = OptionParser(usage = "usage");
 parser.add_option("-n","--nJobs",dest="nJobs",type="int",help="number of jobs. (will be adapted to have more or less the same number of files)",default=1);
-parser.add_option("-i","--input",dest="input",type="string",help="input pset",default="jetmet_analyzer.py");
+parser.add_option("-i","--input",dest="input",type="string",help="input pset",default="jetmet_analyzer_slim.py");
 parser.add_option("-d","--dir",dest="dir",type="string",help="working directory",default="test/mydir");
 parser.add_option("-e","--eos",dest="eos",type="string",help="eos directory to scout, will not read the files in the pSet",default="");
 parser.add_option("","--query",dest="query",action='store_true',help="Use DAS for scouting. Ignore locality",default=False);
 parser.add_option("","--proxy",dest="proxy",action='store_true',help="Copy voms proxy",default=False);
 parser.add_option("","--xrdcp",dest="xrdcp",action='store_true',help="xrdcp file",default=False);
 parser.add_option("","--put-in",dest="put",type="string",help="eos directory to cp the results ",default="");
-parser.add_option("-q","--queue",dest="queue",type="string",help="batch Queue",default="1nh");
+parser.add_option("-q","--queue",dest="queue",type="string",help="batch Queue",default="8nh");
 parser.add_option("","--instance",dest="instance",type="string",help="eos instance eg root://eoscms root://eosusr",default="");
 
 
@@ -248,7 +248,7 @@ call(cmd)
 if opts.eos == "":
 	exec( re.sub('/','.',"from "+opts.input+" import fileList") )
 elif opts.query:
-        cmd = 'das_client.py --query="file dataset=' + opts.eos+'" --idx=0 --limit=10000  | grep -v "Showing" | grep -v \'^$\' '
+        cmd = 'dasgoclient --query="file dataset=' + opts.eos+'" --idx=0 --limit=10000  | grep -v "Showing" | grep -v \'^$\' '
         outputList = check_output(cmd,shell=True);
         fileList = [ '"root://cms-xrd-global.cern.ch//'+ f + '"' for f in outputList.split() if '/store' in f ]
 else:	

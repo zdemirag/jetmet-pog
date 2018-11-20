@@ -1,0 +1,152 @@
+Sender: LSF System <lsfadmin@b675b5bd8a.cern.ch>
+Subject: Job 202733225: <v1/JetHT_HEfail_3> in cluster <batch> Done
+
+Job <v1/JetHT_HEfail_3> was submitted from host <lxplus096.cern.ch> by user <zdemirag> in cluster <batch>.
+Job was executed on host(s) <b675b5bd8a.cern.ch>, in queue <8nh>, as user <zdemirag> in cluster <batch>.
+</afs/cern.ch/user/z/zdemirag> was used as the home directory.
+</afs/cern.ch/user/z/zdemirag/lnwork/JetMET/HEM15_16/CMSSW_10_1_7/src/jetmet-pog/analyzer> was used as the working directory.
+Started at Wed Oct 10 01:04:05 2018
+Results reported on Wed Oct 10 01:27:31 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/afs/cern.ch/user/z/zdemirag/lnwork/JetMET/HEM15_16/CMSSW_10_1_7/src/jetmet-pog/analyzer/v1/JetHT_HEfail/sub_3.sh
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   30.97 sec.
+    Max Memory :                                 446.24 MB
+    Average Memory :                             364.39 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   1140 MB
+    Max Processes :                              13
+    Max Threads :                                19
+    Run time :                                   1403 sec.
+    Turnaround time :                            1424 sec.
+
+The output (if any) follows:
+
+@(#)CERN job starter $Date: 2010/06/23 14:22:16 $
+Working directory is </pool/lsf/zdemirag/202733225> on <b675b5bd8a.cern.ch>
+
+rm: cannot remove `sub_3.fail': No such file or directory
+rm: cannot remove `sub_3.done': No such file or directory
+rm: cannot remove `sub_3.txt': No such file or directory
+entering /pool/lsf/zdemirag/202733225
+Error in <TNetXNGFile::Open>: [ERROR] Server responded with an error: [3011] No servers are available to read the file.
+
+
+ *** Break *** segmentation violation
+All branches configured
+
+
+
+===========================================================
+There was a crash.
+This is the entire stack trace of all threads:
+===========================================================
+
+Thread 6 (Thread 0x2b7bca853700 (LWP 25199)):
+#0  0x00002b7bb510b499 in syscall () from /lib64/libc.so.6
+#1  0x00002b7bc9c7c86f in XrdSys::LinuxSemaphore::Wait (this=0x119d4b60) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/./XrdSys/XrdSysLinuxSemaphore.hh:161
+#2  XrdCl::SyncQueue<XrdCl::JobManager::JobHelper>::Get (this=0x1212a1d8) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/./XrdCl/XrdClSyncQueue.hh:67
+#3  XrdCl::JobManager::RunJobs (this=0x1212a1c0) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdCl/XrdClJobManager.cc:146
+#4  0x00002b7bc9c7ca29 in RunRunnerThread (arg=<optimized out>) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdCl/XrdClJobManager.cc:33
+#5  0x00002b7bb4784aa1 in start_thread () from /lib64/libpthread.so.0
+#6  0x00002b7bb510ec4d in clone () from /lib64/libc.so.6
+
+Thread 5 (Thread 0x2b7bca652700 (LWP 25198)):
+#0  0x00002b7bb510b499 in syscall () from /lib64/libc.so.6
+#1  0x00002b7bc9c7c86f in XrdSys::LinuxSemaphore::Wait (this=0x119d4b60) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/./XrdSys/XrdSysLinuxSemaphore.hh:161
+#2  XrdCl::SyncQueue<XrdCl::JobManager::JobHelper>::Get (this=0x1212a1d8) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/./XrdCl/XrdClSyncQueue.hh:67
+#3  XrdCl::JobManager::RunJobs (this=0x1212a1c0) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdCl/XrdClJobManager.cc:146
+#4  0x00002b7bc9c7ca29 in RunRunnerThread (arg=<optimized out>) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdCl/XrdClJobManager.cc:33
+#5  0x00002b7bb4784aa1 in start_thread () from /lib64/libpthread.so.0
+#6  0x00002b7bb510ec4d in clone () from /lib64/libc.so.6
+
+Thread 4 (Thread 0x2b7bca451700 (LWP 25196)):
+#0  0x00002b7bb510b499 in syscall () from /lib64/libc.so.6
+#1  0x00002b7bc9c7c86f in XrdSys::LinuxSemaphore::Wait (this=0x119d4b60) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/./XrdSys/XrdSysLinuxSemaphore.hh:161
+#2  XrdCl::SyncQueue<XrdCl::JobManager::JobHelper>::Get (this=0x1212a1d8) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/./XrdCl/XrdClSyncQueue.hh:67
+#3  XrdCl::JobManager::RunJobs (this=0x1212a1c0) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdCl/XrdClJobManager.cc:146
+#4  0x00002b7bc9c7ca29 in RunRunnerThread (arg=<optimized out>) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdCl/XrdClJobManager.cc:33
+#5  0x00002b7bb4784aa1 in start_thread () from /lib64/libpthread.so.0
+#6  0x00002b7bb510ec4d in clone () from /lib64/libc.so.6
+
+Thread 3 (Thread 0x2b7bca250700 (LWP 25195)):
+#0  0x00002b7bb478c00d in nanosleep () from /lib64/libpthread.so.0
+#1  0x00002b7bc9ab4753 in XrdSysTimer::Wait (mills=<optimized out>) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdSys/XrdSysTimer.cc:239
+#2  0x00002b7bc9c215f7 in XrdCl::TaskManager::RunTasks (this=0x120ebc50) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdCl/XrdClTaskManager.cc:244
+#3  0x00002b7bc9c21749 in RunRunnerThread (arg=<optimized out>) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdCl/XrdClTaskManager.cc:37
+#4  0x00002b7bb4784aa1 in start_thread () from /lib64/libpthread.so.0
+#5  0x00002b7bb510ec4d in clone () from /lib64/libc.so.6
+
+Thread 2 (Thread 0x2b7bca04f700 (LWP 25194)):
+#0  0x00002b7bb510f243 in epoll_wait () from /lib64/libc.so.6
+#1  0x00002b7bc9ab9804 in XrdSys::IOEvents::PollE::Begin (this=0x120fa3d0, syncsem=<optimized out>, retcode=<optimized out>, eTxt=<optimized out>) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/./XrdSys/XrdSysIOEventsPollE.icc:213
+#2  0x00002b7bc9ab5e75 in XrdSys::IOEvents::BootStrap::Start (parg=0x7ffe16e63e10) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdSys/XrdSysIOEvents.cc:131
+#3  0x00002b7bc9ab3f78 in XrdSysThread_Xeq (myargs=0x1212a290) at /build/cmsbld/auto-builds/CMSSW_10_1_0-slc6_amd64_gcc630/build/CMSSW_10_1_0-build/BUILD/slc6_amd64_gcc630/external/xrootd/4.6.1-omkpbe4/xrootd-4.6.1/src/XrdSys/XrdSysPthread.cc:86
+#4  0x00002b7bb4784aa1 in start_thread () from /lib64/libpthread.so.0
+#5  0x00002b7bb510ec4d in clone () from /lib64/libc.so.6
+
+Thread 1 (Thread 0x2b7bb53bae20 (LWP 24896)):
+#0  0x00002b7bb50d28dd in waitpid () from /lib64/libc.so.6
+#1  0x00002b7bb50644e9 in do_system () from /lib64/libc.so.6
+#2  0x00002b7bb5064820 in system () from /lib64/libc.so.6
+#3  0x00002b7bb6099568 in TUnixSystem::StackTrace() () from /cvmfs/cms.cern.ch/slc6_amd64_gcc630/cms/cmssw/CMSSW_10_1_7/external/slc6_amd64_gcc630/lib/libCore.so
+#4  0x00002b7bb609ba1c in TUnixSystem::DispatchSignals(ESignals) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc630/cms/cmssw/CMSSW_10_1_7/external/slc6_amd64_gcc630/lib/libCore.so
+#5  <signal handler called>
+#6  0x00002b7bc3ad9508 in fwlite::ChainEvent::ChainEvent(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc630/cms/cmssw/CMSSW_10_1_7/lib/slc6_amd64_gcc630/libDataFormatsFWLite.so
+#7  0x00002b7bc7eb205b in ?? ()
+#8  0x00002b7bc7eb2020 in ?? ()
+#9  0x00007ffe16e65f20 in ?? ()
+#10 0x0000000000000056 in ?? ()
+#11 0x00002b7bb5643554 in ?? () from /cvmfs/cms.cern.ch/slc6_amd64_gcc630/lcg/root/6.10.09-omkpbe5/lib/libPyROOT.so
+#12 0x00007ffe16e65af0 in ?? ()
+#13 0x00002b7bb560b811 in FastCall(long, void*, void*, void*) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc630/lcg/root/6.10.09-omkpbe5/lib/libPyROOT.so
+===========================================================
+
+
+The lines below might hint at the cause of the crash.
+You may get help by asking at the ROOT forum http://root.cern.ch/forum.
+Only if you are really convinced it is a bug in ROOT then please submit a
+report at http://root.cern.ch/bugs. Please post the ENTIRE stack trace
+from above as an attachment in addition to anything else
+that might help us fixing this issue.
+===========================================================
+#6  0x00002b7bc3ad9508 in fwlite::ChainEvent::ChainEvent(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc630/cms/cmssw/CMSSW_10_1_7/lib/slc6_amd64_gcc630/libDataFormatsFWLite.so
+#7  0x00002b7bc7eb205b in ?? ()
+#8  0x00002b7bc7eb2020 in ?? ()
+#9  0x00007ffe16e65f20 in ?? ()
+#10 0x0000000000000056 in ?? ()
+#11 0x00002b7bb5643554 in ?? () from /cvmfs/cms.cern.ch/slc6_amd64_gcc630/lcg/root/6.10.09-omkpbe5/lib/libPyROOT.so
+#12 0x00007ffe16e65af0 in ?? ()
+#13 0x00002b7bb560b811 in FastCall(long, void*, void*, void*) () from /cvmfs/cms.cern.ch/slc6_amd64_gcc630/lcg/root/6.10.09-omkpbe5/lib/libPyROOT.so
+===========================================================
+
+
+Traceback (most recent call last):
+  File "/afs/cern.ch/user/z/zdemirag/lnwork/JetMET/HEM15_16/CMSSW_10_1_7/src/jetmet-pog/analyzer/v1/JetHT_HEfail/jetmet_analyzer_3.py", line 57, in <module>
+    for ievent,event in enumerate(events):
+  File "/cvmfs/cms.cern.ch/slc6_amd64_gcc630/cms/cmssw/CMSSW_10_1_7/python/DataFormats/FWLite/__init__.py", line 663, in _next
+    self._createFWLiteEvent()
+  File "/cvmfs/cms.cern.ch/slc6_amd64_gcc630/cms/cmssw/CMSSW_10_1_7/python/DataFormats/FWLite/__init__.py", line 655, in _createFWLiteEvent
+    self._event = ROOT.fwlite.ChainEvent (filenamesSVec)
+TypeError: none of the 2 overloaded methods succeeded. Full details:
+  fwlite::ChainEvent::fwlite::ChainEvent(const vector<string>& iFileNames) =>
+    problem in C++; program state has been reset
+  fwlite::ChainEvent::fwlite::ChainEvent(const fwlite::ChainEvent&) =>
+    could not convert argument 1
+exit status is 1
+
+Job finished at Wed Oct 10 01:26:26 CEST 2018 on node 
+ under linux version Scientific Linux CERN SLC release 6.10 (Carbon)
+
+CERN statistics: This process used approximately : 0:01:02 KSI2K hours (62 KSI2K seconds)
+                 This process corresponds to     : 0:04:04 HS06  hours (244 HS06  seconds)

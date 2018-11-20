@@ -111,18 +111,18 @@ for ievent,event in enumerate(events):
         jet_loose[i] = (NHF[i]<0.99 and NEMF[i]<0.99 and NumConst[i]>1) and ((abs(eta)<=2.4 and CHF[i]>0 and CHM[i]>0 and CEMF[i]<0.99) or abs(eta)>2.4) and abs(eta)<=2.7
         jet_loose[i] = jet_loose[i] or (NHF[i]<0.98 and NEMF[i]>0.01 and NumNeutralParticle[i]>2 and abs(eta)>2.7 and abs(eta)<=3.0 )
         jet_loose[i] = jet_loose[i] or (NEMF[i]<0.90 and NumNeutralParticle[i]>10 and abs(eta)>3.0)
+        
+        if not (j.genJet() == None):
+            genjet_pt[i]  = j.genJet().pt()
+            genjet_eta[i] = j.genJet().eta()
+            genjet_phi[i] = j.genJet().phi()
+            genjet_energy[i] = j.genJet().energy()
 
-        #if not (j.genJet() == None):
-        #    genjet_pt[i]  = j.genJet().pt()
-        #    genjet_eta[i] = j.genJet().eta()
-        #    genjet_phi[i] = j.genJet().phi()
-        #    genjet_energy[i] = j.genJet().energy()
-
-        #else:
-        #    genjet_pt[i] = -999.
-        #    genjet_eta[i] = -999.
-        #    genjet_phi[i] = -999.
-        #    genjet_energy[i] = -999.
+        else:
+            genjet_pt[i] = -999.
+            genjet_eta[i] = -999.
+            genjet_phi[i] = -999.
+            genjet_energy[i] = -999.
 
 
         sourceCandidate = set()
@@ -184,42 +184,12 @@ for ievent,event in enumerate(events):
     #MET Information
     metprod   = mets.product().front()
     met[0]    = metprod.pt()                
-    #genmet[0] = metprod.genMET().pt()                
+    met_phi[0]= metprod.phi()                
+    mex[0]    = metprod.px()                
+    mey[0]    = metprod.py()                
+    genmet[0] = metprod.genMET().pt()                
     rawmet[0] = metprod.uncorPt()
-    
-    for ipf,pf in enumerate(pfs.product()):            
-        if ( abs(pf.pdgId()) == 211 ):
-            charged_met[0]   += pf.pt();
-            #charged_n_met[0] += 1;
-                    
-        elif abs(pf.pdgId()) == 130:
-            neutral_met[0] += pf.pt();
-            #neutral_n_met[0] += 1;
 
-        elif abs(pf.pdgId()) == 22:
-            photon_met[0] += pf.pt();
-            #photon_n_met[0] += 1;
-
-        elif abs(pf.pdgId()) == 13:
-            muon_met[0] += pf.pt();
-            #muon_n_met[0] += 1;
-            
-        elif abs(pf.pdgId()) == 11:
-            electron_met[0] += pf.pt();
-            #electron_n_met[0] += 1;
-
-        elif abs(pf.pdgId()) == 1:
-            hhf_met[0] += pf.pt();            
-            #hhf_n_met[0] += 1;
-            
-        elif abs(pf.pdgId()) == 2:
-            ehf_met[0] += pf.pt();
-            #ehf_n_met[0] += 1;
-            
-        else:
-            other_met[0] += pf.pt();
-            #other_n_met[0] += 1;
-            
     t.Fill()
 
 
